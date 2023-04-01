@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+span {
+  font-weight: 500;
+  font-family: "Fira Sans", sans-serif;
+}
+
+.auth-wrapper {
+  width: 200%;
+  height: 300%;
+  display: table-cell;
+  flex-direction: column;
+
+
+}
+
+.navbar-light {
+  background-color: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+
+.auth-wrapper h3 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.auth-inner {
+  width: 500px;
+  margin: auto;
+  background: #e1dede;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 70px 60px 60px 80px;
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.auth-wrapper .form-control:focus {
+  border-color: #167bff;
+  box-shadow: none;
+}
+
+.auth-wrapper h3 {
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  padding-bottom: 20px;
+}
+
+.forgot-password,
+.forgot-password a {
+  text-align: right;
+  font-size: 16px;
+  padding-top: 4px;
+  color: #7f7d7d;
+  margin: 0;
+}
+
+.forgot-password a {
+  color: #167bff;
+}
+
+table,
+th,
+td {
+  border: 1px solid black !important;
+}
