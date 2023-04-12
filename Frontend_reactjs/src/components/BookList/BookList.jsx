@@ -28,7 +28,7 @@ const BookList = () => {
         </div>
         <div className='booklist-content grid'>
           {
-            booksWithCovers.slice(0, 30).map((item, index) => {
+            booksWithCovers.slice(0, 25).map((item, index) => {
               return (
                 <Book key = {index} {...item} />
               )

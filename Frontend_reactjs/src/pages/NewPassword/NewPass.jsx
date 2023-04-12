@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import "./NewPass.css";
 
 const NewPass = () =>  {
     const { id, token } = useParams();
