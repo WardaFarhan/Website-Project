@@ -26,14 +26,6 @@ const sendWelcomeEmail =  (email, name) => {
           console.log('Email sent: ' + info.response);
         }
       });
-   
-    // {
-    //     to: email,
-    //     from: 'info@circle.com',
-    //     subject: 'Thanks For joining Circle',
-    //     text: `Welcome ${name} to Circle, We Will help you connect your contacts and share your stories`,
-    //     html : `<h3>Welcome ${name}  to Circle, We Will help you connect your contacts and share your stories</h3>` 
-    // }
 
  }
 

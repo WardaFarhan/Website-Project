@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 
-export default function Signup() {
+export default function Signup({history}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+ // useEffect(() => {
+   // if (userInfo) {
+     // history.push("/");
+ //   }
+ // }, [history, userInfo]);
 
   const handleSubmit = (e) => {
       e.preventDefault();

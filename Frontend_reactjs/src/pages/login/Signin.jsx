@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signin.css";
+//import { useSelector } from "react-redux";
 
 
-export default function Signin() {
+
+export default function Signin({ history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ 
+ // const userLogin = useSelector((state) => state.userLogin);
+ // const { error, userInfo } = userLogin;
+
+ // useEffect(() => {
+   // if (userInfo) {
+     // history.push("/saved");
+ //   }
+ // }, [history, userInfo]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,6 +50,7 @@ export default function Signin() {
   return (
     <div className="auth-wrapper">
       <div className="auth-inner">
+        
         <form onSubmit={handleSubmit} action="/signin" method="post">
           <h3>Sign In</h3>
 

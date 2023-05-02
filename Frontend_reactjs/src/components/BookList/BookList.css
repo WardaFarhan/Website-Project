@@ -53,6 +53,15 @@
     font-size: 14px;
 }
 
+.book-item-info-item.reviews{
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.avgRating i {
+        font-size: 1rem;
+}
+
 @media screen and (min-width: 600px){
     .booklist-content{
         grid-template-columns: repeat(2, 1fr);

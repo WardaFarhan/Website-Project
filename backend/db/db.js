@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("../environment/environment");
 
-mongoose.connect(config.MONGOURI, {
+mongoose.connect(config.MONGOURI || 'mongodb://localhost/googlebooks', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
