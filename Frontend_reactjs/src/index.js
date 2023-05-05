@@ -15,7 +15,8 @@ import NewPass from "./pages/NewPassword/NewPass";
 import Signup from "./pages/Signup/Signup";
 import BookList from "./components/BookList/BookList";
 import BookDetails from "./components/BookDetails/BookDetails";
-//import Profile from './pages/Dashboard/Profile';
+import SavedBooks from "./pages/SavedBooks/SavedBooks";
+import Profile from "./pages/Profile/Profile";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,8 +28,9 @@ root.render(
           <Route path = "signin" element = {<Signin />} />
           <Route path = "reset" element = {<Reset />} />
           <Route path = "newpassword" element = {<NewPass />} />
-          {/*<Route path = "profile" element = {<Profile />} />*/}
+          <Route path = "profile" element = {<Profile />} />
           <Route path = "signup" element = {<Signup />} />
+          <Route path='/saved' component={<SavedBooks />} />
           <Route path = "book" element = {<BookList />} />
           <Route path = "/book/:id" element = {<BookDetails />} />
         </Route>

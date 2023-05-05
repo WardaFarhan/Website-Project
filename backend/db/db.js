@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("../environment/environment");
 
-mongoose.connect(config.MONGOURI || 'mongodb://localhost/googlebooks', {
+mongoose.connect(config.MONGOURI || 'mongodb://localhost/openlibraryapi', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
