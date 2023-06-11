@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 
 //Routes
 app.use(require("./api/routes/auth"));
+app.use(require('./api/routes/book_route_call'));
 
 app.listen(port, () => {
     console.log(`Server started on ${port}`);

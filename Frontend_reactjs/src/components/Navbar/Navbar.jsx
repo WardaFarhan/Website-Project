@@ -1,27 +1,21 @@
 import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import "./Navbar.css";
 import { Navbar, Nav, Modal, Tab } from 'react-bootstrap';
-
 import {} from "react-router-dom";
 // import logoImg from "../../images/logo.jpg";
 import logoImg from "../../images/logs.png"
 import {HiOutlineMenuAlt3} from "react-icons/hi";
-import Signin from '../../pages/login/Signin';
-import Signup from '../../pages/Signup/Signup';
+//import Signin from '../../pages/login/Signin';
+//import Signup from '../../pages/Signup/Signup';
 import Auth from '../../utils/auth';
-
-
-
+import { USER_LOGOUT } from '../../actions/constants';
 
 const AppNavbar = () => {
-
-
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleNavbar = () => setToggleMenu(!toggleMenu);
   // set modal display state
-  const [showModal, setShowModal] = useState(false);
+  //const [showModal, setShowModal] = useState(false);
   //useEffect(() => {}, [userInfo]);
 
   return (
@@ -49,59 +43,20 @@ const AppNavbar = () => {
               <Link to = "about" className='nav-link text-uppercase  fs-22 fw-6 ls-1'>about</Link>
             </li>
             <li className='nav-item'>
-           {/* <Link to = "signin" className='nav-link text-uppercase  fs-22 fw-6 ls-1'>Signin</Link> */}
-           {/* if user is logged in show saved books and logout */}
-           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
-           {Auth.loggedIn() ? (
-                <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Books
-                  </Nav.Link>
-                  <Nav.Link as={Link} to='/profile'>
-                    Profile
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-
-                </>
-              ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-       
-      {/* set modal data up */}
-      <Modal
-        size='lg'
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'>
-        {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='signin'>
-          <Modal.Header closeButton>
-            <Modal.Title id='signup-modal'>
-              <Nav variant='pills'>
-                <Nav.Item>
-                  <Nav.Link eventKey='signin'>Login</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Tab.Content>
-              <Tab.Pane eventKey='signin'>
-                <Signin handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-              <Tab.Pane eventKey='signup'>
-                <Signup handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-            </Tab.Content>
-          </Modal.Body>
-        </Tab.Container>
-      </Modal>
+            <Link to = "signin" className='nav-link text-uppercase  fs-22 fw-6 ls-1'>Signin</Link>
+           {/* if user is logged in show saved books and logout 
+            {
+              Auth ?
+              <li className='nav-item'>
+          <Link onClick={USER_LOGOUT} to ="signin " className='nav-link text-uppercase fs-22 fw-6 ls-1' >Logout</Link>
+            </li>
+            :
+            <li className='nav-item'>
+          <Link to ="signin " className='nav-link text-uppercase fs-22 fw-6 ls-1' >Signin/Signout</Link>
+            </li>
+            
+            }
+            */} 
             </li> 
           </ul>
         </div>

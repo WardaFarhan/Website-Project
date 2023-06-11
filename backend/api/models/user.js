@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const {ObjectId} = mongoose.Schema.Types;
-
+const { Book } = require('./book.model');
 // import schema from Book.js
-const bookSchema = require('./Book');
+//const bookSchema = require('./Book');
 
 const userSchema = new Schema({
     name : {
@@ -33,12 +33,8 @@ const userSchema = new Schema({
         type : String,
         default : "https://res.cloudinary.com/kammy/image/upload/v1607202037/default-user-image-2_pputze.png"
     },
-    followers : [ {type : ObjectId, ref : 'User'} ],
-    following : [ {type : ObjectId, ref : 'User'} ],
-
-    // set savedBooks to be an array of data that adheres to the bookSchema
-    savedBooks: [bookSchema],
-  },
+    books: [{ type: mongoose.Schema.Types.ObjectId, ref: Book }],
+  }, 
   // set this to use virtual below
   {
     toJSON: {
@@ -57,9 +53,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
   };
   
   // when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-  userSchema.virtual('bookCount').get(function () {
-    return this.savedBooks.length;
-  });
+  //userSchema.virtual('bookCount').get(function () {
+    //return this.savedBooks.length;
+  //});
 
 const User =  mongoose.model('User', userSchema);
 module.exports = User;

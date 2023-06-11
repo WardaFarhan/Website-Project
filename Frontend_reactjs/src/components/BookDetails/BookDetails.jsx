@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import {Card, CardActions, CardContent, Typography, CardMedia} from '@material-ui/core';
 import Loading from "../Loader/Loader";
 import coverImg from "../../images/cover_not_found.jpg";
 import "./BookDetails.css";
@@ -7,11 +8,13 @@ import {FaArrowLeft} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const URL = "https://openlibrary.org/works/";
+const Recommendation_URL = "http://127.0.0.1.5000"
 
 const BookDetails = () => {
   const {id} = useParams();
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState(null);
+  const [recommendBooks, setRecommendedBooks] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +46,41 @@ const BookDetails = () => {
         setLoading(false);
       }
     }
+
+    async function getRecommendedBooks(){
+      try {
+        {/*// TODO: fetch user prev books from backend server
+         const userId = `645665ab60aef345ace8e675`;
+        const userPrevBooks = await fetch(`http://mongodb+srv://warda:12345@requirelogin.bhn90gr.mongodb.net/?retryWrites=true&w=majority/api/users/fetchUserBooks?userId=${userId}`
+          //'http:localhost:27017/api/routes/book_route_call/fetchUserBooks?userId=');
+        //['message in a bottle'];
+        //const response = await fetch(`http://127.0.0.1:5000/books/recommend?books=[%27harry%20potter%27,%27message%20in%20a%20bottle%27,%27spider%20man%27]`);
+        const response = await fetch(`${Recommendation_URL}/books/recommend?books=[...${userPrevBooks}]`);
+      */}
+
+        // TODO: fetch userId from localstorage which was saved on signup/login
+        const userId = window.localstorage.getItem('user');
+        let userPrevBooksData = await fetch(
+          //`http://localhost:8080/api/users/fetchUserBooks?userId=${userId}`
+          'http://localhost:3200/api/book_route_call/fetchUserBooks?userId=${userId}'
+        );
+        userPrevBooksData = await userPrevBooksData.json();
+        const userPrevBooks = userPrevBooksData ? userPrevBooksData.books.map(book => book?.title || '') : []
+        
+        const response = await fetch(`${Recommendation_URL}/books/recommend?books=[${userPrevBooks.map(b=>`'${b}'`)}]`);
+        const data = await response.json();
+        console.log(data);
+        if (data && data.recommendations) {
+          setRecommendedBooks(data.recommendations);
+        }
+      } catch(error){
+        console.log(error);
+      }
+    }
+  
+  
     getBookDetails();
+    getRecommendedBooks();
   }, [id]);
 
   if(loading) return <Loading />;
@@ -80,6 +117,49 @@ const BookDetails = () => {
               <span>{book?.subjects}</span>
             </div>
           </div>
+
+
+            {
+              recommendBooks?.map((book) => {
+                return(
+                <>
+                <Card style="cardMain" key={book.id}>
+                <CardContent >
+              <Typography gutterBottom variant="h3" component="div">
+               Recommended Books
+              </Typography>
+              </CardContent>
+
+                 <CardActions>
+                 <CardMedia style = "cardImage">{book.cover_img}</CardMedia>
+
+                <CardContent >
+                 <Typography gutterBottom variant="h5" component="div">
+                  {book.title}
+                 </Typography>
+                 </CardContent>
+                 </CardActions>
+                  
+                  <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                {book.author.join(", ")}
+                </Typography>
+              </CardContent>
+
+               <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                {book.edition_count}
+                </Typography>
+              </CardContent>
+
+               <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                {book.first_publish_year}
+                </Typography>
+              </CardContent>
+                </Card>
+                </>
+               ) }) }
         </div>
       </div>
     </section>
